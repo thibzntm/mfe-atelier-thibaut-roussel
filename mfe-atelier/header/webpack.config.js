@@ -4,13 +4,14 @@ const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPl
 module.exports = {
     mode: 'development',
     devServer: {
-        port: 3000,
+        port: 3001,
     },
     plugins: [
         new ModuleFederationPlugin({
-            name: 'shell',
-            remotes: {
-                header: 'header@http://localhost:3001/remoteEntry.js', // Charger le Header distant
+            name: 'header',
+            filename: 'remoteEntry.js',
+            exposes: {
+                './Header': './src/index.js',  // Expose le module Header
             },
         }),
         new HtmlWebpackPlugin({
